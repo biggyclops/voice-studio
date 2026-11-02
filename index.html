@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Studio</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <nav>
+    <strong>Voice Studio</strong>
+    <button data-tab="main" class="tab active">Speak</button>
+    <button data-tab="voices" class="tab">Voices</button>
+    <button data-tab="settings" class="tab">Settings</button>
+  </nav>
+
+  <section id="main" class="screen">
+    <div class="row">
+      <label>Voice <select id="voice"></select></label>
+      <button id="manage" class="link">Manage voices</button>
+    </div>
+    <textarea id="text" rows="6" placeholder="Type or paste text to speak..."></textarea>
+    <div class="row">
+      <label>Speed <input id="speed" type="range" min="0.7" max="1.3" step="0.05" value="1" /></label>
+      <span id="speedVal">1.00x</span>
+    </div>
+    <div class="row">
+      <button id="speak" class="primary">Speak</button>
+      <audio id="player" controls></audio>
+      <button id="save" disabled>Save .wav</button>
+    </div>
+    <p id="mainMsg" class="msg"></p>
+    <h3>History</h3>
+    <ul id="history" class="list"></ul>
+  </section>
+
+  <section id="voices" class="screen hidden">
+    <h3>Add voice</h3>
+    <div class="form">
+      <label>Name <input id="vName" placeholder="e.g. Anna" /></label>
+      <div class="row">
+        <button id="pick">Choose audio or video file...</button>
+        <span id="pickName" class="muted">No file chosen</span>
+      </div>
+      <div class="row">
+        <label>Start (s) <input id="vStart" type="number" min="0" step="0.5" value="0" /></label>
+        <label>End (s) <input id="vEnd" type="number" min="1" step="0.5" value="20" /></label>
+        <span class="muted">10-30 seconds of one person speaking clearly</span>
+      </div>
+      <label>Transcript (optional) <textarea id="vText" rows="2" placeholder="What is said in the sample. Leave blank to auto-transcribe on the server."></textarea></label>
+      <label class="check"><input id="vConsent" type="checkbox" /> I have this person's permission to clone their voice</label>
+      <button id="add" class="primary" disabled>Add voice</button>
+      <p id="voiceMsg" class="msg"></p>
+    </div>
+    <h3>Saved voices</h3>
+    <ul id="voiceList" class="list"></ul>
+    <audio id="samplePlayer"></audio>
+  </section>
+
+  <section id="settings" class="screen hidden">
+    <h3>Settings</h3>
+    <label>Hades server URL <input id="server" /></label>
+    <div class="row">
+      <button id="saveSettings">Save</button>
+      <button id="test">Test Connection</button>
+    </div>
+    <p id="settingsMsg" class="msg"></p>
+  </section>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
